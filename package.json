@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@architect/architect": "5.0.7"
+  },
+  "devDependencies": {
+    "tape": "4.9.2"
   }
 }

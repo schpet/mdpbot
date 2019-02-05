@@ -3,5 +3,11 @@
   "dependencies": {
     "@architect/data": "2.0.13",
     "@architect/functions": "1.13.7"
+  },
+  "scripts": {
+    "test": "node test.js | faucet"
+  },
+  "devDependencies": {
+    "faucet": "0.0.1"
   }
 }
