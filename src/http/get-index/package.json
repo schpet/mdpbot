@@ -4,7 +4,9 @@
     "@architect/data": "2.0.13",
     "@architect/functions": "1.13.7",
     "chrome-aws-lambda": "1.11.2",
-    "iltorb": "2.4.1",
     "puppeteer-core": "1.12.1"
+  },
+  "devDependencies": {
+    "puppeteer": "1.12.1"
   }
 }

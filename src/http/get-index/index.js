@@ -2,8 +2,9 @@
 // let arc = require('@architect/functions')
 // let url = arc.http.helpers.url
 const chromium = require("chrome-aws-lambda")
-const puppeteer = require("puppeteer-core")
+const puppeteer = chromium.puppeteer
 
+// https://github.com/alixaxel/chrome-aws-lambda/issues/7#issuecomment-450402988
 exports.handler = async function http(req) {
   console.log(req)
 
