@@ -2,6 +2,7 @@
   "name": "testapp-get-index",
   "dependencies": {
     "@architect/data": "2.0.13",
-    "@architect/functions": "1.13.7"
+    "@architect/functions": "1.13.7",
+    "puppeteer": "1.12.1"
   }
 }

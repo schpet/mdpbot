@@ -1,12 +1,24 @@
 // @architect/functions enables secure sessions, express-style middleware and more
 // let arc = require('@architect/functions')
 // let url = arc.http.helpers.url
+const puppeteer = require("puppeteer")
 
 exports.handler = async function http(req) {
   console.log(req)
+
+  const browser = await puppeteer.launch()
+  const page = await browser.newPage()
+  // await page.goto("https://mydiscoverypass.quipugroup.net")
+  await page.goto("http://peterschilling.org")
+  // await page.screenshot({ path: "example.png" })
+  const title = await page.title()
+  console.log(`title: ${title}`)
+
+  await browser.close()
+
   return {
-    type: 'text/html; charset=utf8',
-    body: '<h1>Hello world!</h1>'
+    type: "text/html; charset=utf8",
+    body: `<h1>Hello world! title=${title}</h1>`
   }
 }
 
