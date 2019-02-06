@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@architect/architect": "5.0.7"
+    "@architect/architect": "5.0.7",
+    "chrome-aws-lambda": "1.11.2"
   },
   "devDependencies": {
+    "puppeteer": "1.12.2",
     "tap-spec": "5.0.0",
     "tape": "4.9.2"
   }

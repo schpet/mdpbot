@@ -1,11 +1,15 @@
 approach:
 
 1. login
-2. download html, persist it with a date
+2. generate a data structure like this:
 
-3. parse html look for, generate a data structure something like this:
-   "Passes Available for:
-
-   [
-
-   ]
+```
+[
+  {
+    venue: "Hollywood Theatre",
+    events: [
+      "Boom Arts at Imago Theatre\nPortland, OR\nMobile Pass Accepted\n\nPescador (Fisherman) - This pass admits two people to the 3 pm matinee.\n"
+    ]
+  }
+]
+```
