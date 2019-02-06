@@ -15,7 +15,8 @@ approach:
 ```
 
 3. diff the data structure against a previously persisted one (or [] as default)
-4. report if
-   - that venue is new and it has events
-   - that venue's events include events that were not in the previously persisted one
-5. persist that data structure
+   - report if venue is new and it has events
+   - report if venue's events include events that were not in the previously persisted one
+5. persist new data structure
+
+persistence: single S3 json file?
