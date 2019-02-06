@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=testing AWS_PROFILE=xxx AWS_REGION=xxx tape tests/*-test.js | tap-spec"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@architect/architect": "5.0.7"
+    "@architect/architect": "5.0.7",
+    "chrome-aws-lambda": "1.11.2"
   },
   "devDependencies": {
+    "puppeteer": "1.12.2",
+    "tap-spec": "5.0.0",
     "tape": "4.9.2"
   }
 }
