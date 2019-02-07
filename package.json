@@ -14,8 +14,11 @@
     "chrome-aws-lambda": "1.11.2"
   },
   "devDependencies": {
+    "@types/node": "10.12.21",
+    "@types/tape": "4.2.33",
     "puppeteer": "1.12.2",
     "tap-spec": "5.0.0",
-    "tape": "4.9.2"
+    "tape": "4.9.2",
+    "typescript": "3.3.1"
   }
 }
