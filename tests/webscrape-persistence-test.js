@@ -1,8 +1,8 @@
 require("./env")
 
+const test = require("tape")
 const sinon = require("sinon")
 const aws = require("aws-sdk")
-const test = require("tape")
 const persistence = require("../src/shared/persistence")
 
 /*
