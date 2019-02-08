@@ -1,5 +1,5 @@
 @app
-testapp
+mdpbot
 
 @http
 get /
@@ -8,8 +8,9 @@ post /reset
 
 @events
 web-scrape
+simple
 
 @scheduled
-web-scrape rate(4 hours)
+periodic-scrape rate(4 hours)
 
 @tables

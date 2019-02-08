@@ -43,7 +43,7 @@ test("getNewEvents excludes venues without events", t => {
   t.deepEqual(result, [])
 })
 
-test.only("newEventsMessage builds a nice message", t => {
+test("newEventsMessage builds a nice message", t => {
   t.plan(2)
 
   /** @type {MY.Venue[]} */

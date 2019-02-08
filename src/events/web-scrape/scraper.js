@@ -1,5 +1,7 @@
 /** @type {any} */
 const chromium = require("chrome-aws-lambda")
+
+/** @type {import('puppeteer')} */
 const puppeteer = chromium.puppeteer
 
 // https://github.com/alixaxel/chrome-aws-lambda/issues/7#issuecomment-450402988
@@ -11,6 +13,9 @@ const puppeteer = chromium.puppeteer
 async function scrape(venueFocus) {
   const username = process.env.USERNAME
   const password = process.env.PASSWORD
+
+  if (!username || !password)
+    throw new Error("invariant: expected username / pass")
 
   // @ts-ignore
   const browser = await puppeteer.launch({
@@ -25,6 +30,7 @@ async function scrape(venueFocus) {
   const page = await browser.newPage()
 
   await page.goto("https://mydiscoverypass.quipugroup.net")
+  await page.content()
   await page.type("#patronNumber", username)
   await page.type("#patronPassword", password)
   await page.click("#vpass_loginButton")
@@ -43,11 +49,16 @@ async function scrape(venueFocus) {
 
     return [...nodes].map(node => {
       const heading = node.querySelector("h2")
+      if (heading === null || heading.textContent === null)
+        throw new Error("invariant: expected heading with text")
 
-      /** @type {HTMLAnchorElement} */
+      /** @type {HTMLAnchorElement|null} */
       const checkDatesAnchor = node.querySelector(
         'a[alt="Check Available Dates"]'
       )
+      if (checkDatesAnchor === null)
+        throw new Error("invariant: expected check dates anchor")
+
       return {
         url: checkDatesAnchor.href,
         venue: heading.textContent.trim()

@@ -6,30 +6,40 @@ const notifications = require("./notifications")
 const events = require("./events")
 
 async function handler(record, callback) {
-  console.log(JSON.stringify(record, null, 2))
-  console.log("scrape event!")
+  try {
+    console.log(`web-scrape started! 1312 username=${process.env.USERNAME}`)
 
-  const data = await scraper.scrape()
+    const start = new Date()
 
-  const previousDataSerialized = await persistence.read()
-  const previousData = previousDataSerialized
-    ? events.deserialize(previousDataSerialized.data)
-    : []
+    const data = await scraper.scrape()
 
-  const newEvents = events.getNewEvents(previousData, data)
+    const previousDataSerialized = await persistence.read()
+    const previousData = previousDataSerialized
+      ? events.deserialize(previousDataSerialized.data)
+      : []
 
-  await persistence.write(JSON.stringify(data))
+    const newEvents = events.getNewEvents(previousData, data)
 
-  if (newEvents.length > 0) {
-    const message = events.newEventsMessage(newEvents)
-    await notifications.notify({
-      to: ["peter@peterschilling.org"],
-      body: message.body,
-      subject: message.subject
-    })
+    await persistence.write(JSON.stringify(data))
+
+    if (newEvents.length > 0) {
+      const message = events.newEventsMessage(newEvents)
+      await notifications.notify({
+        to: ["peter@peterschilling.org"],
+        body: message.body,
+        subject: message.subject
+      })
+    }
+
+    const end = new Date()
+    const diff = end.getTime() - start.getTime()
+
+    console.log(`web-scrape finished in ${diff}ms`)
+
+    callback()
+  } catch (e) {
+    callback(e)
   }
-
-  callback()
 }
 
 exports.handler = arc.events.subscribe(handler)

@@ -1,5 +1,5 @@
 {
-  "name": "mdpbot-post-scrape",
+  "name": "mdpbot-simple",
   "dependencies": {
     "@architect/data": "2.0.13",
     "@architect/functions": "2.0.4"
