@@ -4,6 +4,7 @@ testapp
 @http
 get /
 post /scrape
+post /reset
 
 @events
 web-scrape
