@@ -1,7 +1,10 @@
 const arc = require("@architect/functions")
 
 const scraper = require("./scraper")
-const persistence = require("./persistence")
+
+/** @type {import('../../shared/persistence')} */
+const persistence = require("@architect/shared/persistence")
+
 const notifications = require("./notifications")
 const events = require("./events")
 
@@ -10,7 +13,7 @@ async function handler(event, callback) {
 
   const previousDataSerialized = await persistence.read()
   const previousData = previousDataSerialized
-    ? JSON.parse(previousDataSerialized)
+    ? JSON.parse(previousDataSerialized.data)
     : []
 
   const newEvents = events.getNewEvents(previousData, data)
