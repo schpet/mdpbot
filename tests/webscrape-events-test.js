@@ -43,35 +43,45 @@ test("getNewEvents excludes venues without events", t => {
   t.deepEqual(result, [])
 })
 
-test("newEventsMessage builds a nice message", t => {
+test.only("newEventsMessage builds a nice message", t => {
   t.plan(2)
 
   /** @type {MY.Venue[]} */
   const venues = [
     {
-      events: ["other event"],
+      venue: "Hollywood Theater",
       url: "http://hollywood.biz",
-      venue: "Hollywood Theater"
+      events: ["other event"],
     },
     {
-      events: ["fun times", "cool times"],
+      venue: "cooltown",
       url: "http://cool.biz",
-      venue: "cooltown"
+      events: ["fun times\nyep yep", "cool times"],
     }
   ]
 
   const message = events.newEventsMessage(venues)
   t.equal(message.subject, "New events at Hollywood Theater, cooltown")
-  t.equal(message.body, `Events
+  t.equal(
+    message.body,
+    `🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
+Hollywood Theater
+🌐 http://hollywood.biz
+🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
 
-Hollywood Theater (http://hollywood.biz)
+other event
 
-- other event
+🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
+cooltown
+🌐 http://cool.biz
+🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
 
-cooltown (http://cool.biz)
+fun times
+yep yep
 
-- fun times
-- cool times
+🎫➕🎫➕🎫➕🎫
+
+cool times
 `
   )
 })

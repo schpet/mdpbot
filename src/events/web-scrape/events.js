@@ -27,25 +27,27 @@ exports.getNewEvents = function(oldVenues, newVenues) {
  */
 exports.newEventsMessage = events => {
   const venueSummary = events.map(e => e.venue).join(", ")
-  const details = events
+  const subject = `New events at ${venueSummary}`
+
+  const hr = "🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫\n"
+  const hr2 = "🎫➕🎫➕🎫➕🎫\n"
+
+  const body = events
     .map(
       e =>
-        `${e.venue} (${e.url})\n\n${e.events.map(es => `- ${es}\n`).join("")}`
+        `${hr}${e.venue}\n🌐 ${e.url}\n${hr}\n${e.events
+          .map(x => `${x}\n`)
+          .join(`\n${hr2}\n`)}`
     )
     .join("\n")
 
-  return {
-    subject: `New events at ${venueSummary}`,
-    body: `Events
-
-${details}`
-  }
+  return { subject, body }
 }
 
 /**
  * @param {string} file
  */
-exports.deserialize = (file) => {
+exports.deserialize = file => {
   try {
     const data = JSON.parse(file)
 
