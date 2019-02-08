@@ -19,7 +19,7 @@ exports.handler = async function http(req) {
   const diff = end.getTime() - start.getTime()
 
   return {
-    type: "text/html; charset=utf8",
-    body: `<pre>s3 took ${diff}ms to respond with ${message}</pre>`
+    type: "text/plain; charset=utf8",
+    body: `s3 took ${diff}ms to respond with ${message}`
   }
 }
