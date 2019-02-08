@@ -41,3 +41,19 @@ exports.newEventsMessage = events => {
 ${details}`
   }
 }
+
+/**
+ * @param {string} file
+ */
+exports.deserialize = (file) => {
+  try {
+    const data = JSON.parse(file)
+
+    if (!Array.isArray(data))
+      throw new Error(`invariant: expected data to be an array, got ${file}`)
+
+    return /** @type {MY.Venue[]} */ (data)
+  } catch (e) {
+    throw new Error(`failed to parse file: ${file}`)
+  }
+}

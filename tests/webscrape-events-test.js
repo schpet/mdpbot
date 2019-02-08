@@ -1,5 +1,5 @@
 const test = require("tape")
-const events = require("../src/scheduled/web-scrape/events")
+const events = require("../src/events/web-scrape/events")
 
 test("getNewEvents gives me all events for new venues", t => {
   t.plan(1)

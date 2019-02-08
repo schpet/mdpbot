@@ -1,7 +1,7 @@
 require("./env")
 const fs = require('fs').promises
 var test = require("tape")
-var scrape = require("../src/scheduled/web-scrape/scraper")
+var scrape = require("../src/events/web-scrape/scraper")
 
 test.skip("print scrape results", async t => {
   t.plan(1)

@@ -1,7 +1,7 @@
 const aws = require("aws-sdk")
 const sinon = require("sinon")
 const test = require("tape")
-const scrape = require("../src/scheduled/web-scrape/index")
+const scrape = require("../src/events/web-scrape/index")
 
 test("handler", async t => {
   t.plan(1)
@@ -20,7 +20,7 @@ test("handler", async t => {
     })
   })
 
-  scrape.handler({}, {}, (err, result) => {
+  scrape.handler({Records:[]}, {}, (err, result) => {
     t.ok(true, "executed function")
     aws.S3.restore()
     aws.SES.restore()

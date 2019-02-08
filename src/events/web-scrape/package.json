@@ -1,0 +1,11 @@
+{
+  "name": "testapp-web-scrape",
+  "dependencies": {
+    "@architect/data": "2.0.13",
+    "@architect/functions": "2.0.4",
+    "chrome-aws-lambda": "1.11.2"
+  },
+  "devDependencies": {
+    "puppeteer": "1.12.2"
+  }
+}

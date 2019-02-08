@@ -1,3 +1,6 @@
+let arc = require('@architect/functions')
+let url = arc.http.helpers.url
+
 /** @type {import('../../shared/persistence')} */
 const persistence = require("@architect/shared/persistence")
 
@@ -19,7 +22,21 @@ exports.handler = async function http(req) {
   const diff = end.getTime() - start.getTime()
 
   return {
-    type: "text/plain; charset=utf8",
-    body: `s3 took ${diff}ms to respond with ${message}`
+    type: "text/html; charset=utf8",
+    body: `
+<!doctype html>
+<html>
+<body>
+<h1>Scrapy</h1>
+<pre>
+s3 took ${diff}ms to respond with ${message}
+</pre>
+
+<form action=${url('/scrape')} method=post>
+  <button type=submit>Scrape 'n 💌</button>
+</form>
+
+</body>
+</html>`
   }
 }
