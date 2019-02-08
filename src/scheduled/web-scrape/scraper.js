@@ -40,10 +40,19 @@ async function scrape(venueFocus) {
   const venues = await page.evaluate(venueSelector => {
     /** @type {NodeListOf<HTMLHeadingElement>} */
     const nodes = document.querySelectorAll(venueSelector)
-    return [...nodes].map(node => ({
-      url: node.querySelector('a[alt="Check Available Dates"]').href,
-      venue: node.querySelector("h2").textContent.trim()
-    }))
+
+    return [...nodes].map(node => {
+      const heading = node.querySelector("h2")
+
+      /** @type {HTMLAnchorElement} */
+      const checkDatesAnchor = node.querySelector(
+        'a[alt="Check Available Dates"]'
+      )
+      return {
+        url: checkDatesAnchor.href,
+        venue: heading.textContent.trim()
+      }
+    })
   }, venueSelector)
 
   const venuesToInspect = venueFocus

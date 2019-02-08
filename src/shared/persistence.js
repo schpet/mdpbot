@@ -1,20 +1,20 @@
 const aws = require("aws-sdk")
 
-const bucket = process.env.BUCKET
+const bucket = "schpet-mydiscoverpass-or"
 const key = `MYdiscoverpass-${process.env.NODE_ENV}.json`
 
-if (!bucket) throw new Error("invariant: expected bucket")
-
 /**
- * @returns {Promise<{data: string, lastModified: Date}|null>}
+ * @returns {Promise<{data: string, lastModified: Date|undefined}|null>}
  */
 async function read() {
   const s3 = new aws.S3({ region: process.env.AWS_REGION })
+
   try {
     const file = await s3.getObject({ Bucket: bucket, Key: key }).promise()
+    if (!file.Body) return null
     return {
-      data: file.Body.toString(),
-      lastModified: new Date(file.LastModified)
+      data: file.Body && file.Body.toString(),
+      lastModified: file.LastModified
     }
   } catch (e) {
     if (e.code === "NoSuchKey") {
