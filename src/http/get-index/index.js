@@ -1,13 +1,29 @@
+var aws = require("aws-sdk")
 // @architect/functions enables secure sessions, express-style middleware and more
 // let arc = require('@architect/functions')
 // let url = arc.http.helpers.url
 
 exports.handler = async function http(req) {
   console.log(req)
+  var s3 = new aws.S3({ region: process.env.AWS_REGION })
+
+  const bucket = process.env.BUCKET
+
+  const start = new Date()
+  const message = await (async () => {
+    try {
+      const filesOnS3 = await s3.listObjectsV2({ Bucket: bucket }).promise()
+      return `${JSON.stringify(filesOnS3.Contents)}`
+    } catch (err) {
+      return `listing objects in s3 failed ${JSON.stringify(err)}`
+    }
+  })()
+  const end = new Date()
+  const diff = end.getTime() - start.getTime()
 
   return {
     type: "text/html; charset=utf8",
-    body: `<pre>hi!</pre>`
+    body: `<pre>s3 took ${diff}ms to respond: ${message}</pre>`
   }
 }
 
