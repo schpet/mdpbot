@@ -17,7 +17,6 @@ async function scrape(venueFocus) {
   if (!username || !password)
     throw new Error("invariant: expected username / pass")
 
-  // @ts-ignore
   const browser = await puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
@@ -26,7 +25,6 @@ async function scrape(venueFocus) {
     // slowMo: 200
   })
 
-  // const browser = await puppeteer.launch()
   const page = await browser.newPage()
 
   await page.goto("https://mydiscoverypass.quipugroup.net")
@@ -38,11 +36,9 @@ async function scrape(venueFocus) {
   await page.goto("https://mydiscoverypass.quipugroup.net/?method=Venues")
 
   const venueSelector = ".fieldsetVenueOffers"
-  // await page.waitForSelector(venueSelector)
   await page.content()
 
   // Extract the results from the page.
-  /** @type {{url: string, venue: string}[]} */
   const venues = await page.evaluate(venueSelector => {
     /** @type {NodeListOf<HTMLHeadingElement>} */
     const nodes = document.querySelectorAll(venueSelector)
@@ -76,7 +72,6 @@ async function scrape(venueFocus) {
     const eventsSelector = ".fieldsetVenuesByDate"
     await page.content()
 
-    /** @type {string[]} */
     const events = await page.evaluate(eventsSelector => {
       /** @type {NodeListOf<HTMLFieldSetElement>} */
       const nodes = document.querySelectorAll(eventsSelector)
