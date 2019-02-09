@@ -8,7 +8,10 @@ const events = require("./events")
 
 async function handler(record, callback) {
   try {
-    console.log(`web-scrape started! 1312 username=${process.env.USERNAME}`)
+    console.log(`web-scrape started`)
+    const recipientEmails = process.env.RECIPIENT_EMAILS
+    if (!recipientEmails) throw new Error("invariant: no recipients")
+    const recipients = recipientEmails.split(',')
 
     const start = new Date()
 
@@ -26,7 +29,7 @@ async function handler(record, callback) {
     if (newEvents.length > 0) {
       const message = events.newEventsMessage(newEvents)
       await notifications.notify({
-        to: ["peter@peterschilling.org"],
+        to: recipients,
         body: message.body,
         subject: message.subject
       })
