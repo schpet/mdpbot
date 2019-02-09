@@ -14,8 +14,12 @@ approach:
 ]
 ```
 
-3. diff the data structure against a previously persisted one (or [] as default)
+3. diff the data against a previously persisted one (or [] as default)
    - report if venue is new and it has events
    - report if venue's events include events that were not in the previously persisted one
 4. email new events!
-5. persist new data structure
+5. persist new data
+
+todo:
+
+- alerts when failures occur (e.g. scraping changed)
