@@ -1,4 +1,5 @@
 let arc = require("@architect/functions")
+
 const scraper = require("./scraper")
 /** @type {import('../../shared/persistence')} */
 const persistence = require("@architect/shared/persistence")

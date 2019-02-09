@@ -17,7 +17,6 @@
     "@types/puppeteer": "1.12.1",
     "@types/sinon": "7.0.5",
     "@types/tape": "4.2.33",
-    "puppeteer": "1.12.2",
     "sinon": "7.2.3",
     "tap-spec": "5.0.0",
     "tape": "4.9.2",

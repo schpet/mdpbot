@@ -15,7 +15,6 @@ notifications.notify({ to: ["peter@peterschilling.org"], subject: "A test email 
  */
 exports.notify = async function({ to, subject, body }) {
   aws.config.update({ region: process.env.AWS_REGION })
-  console.log(`notifying ${to.join(", ")} subject=${subject} body=${body}`)
 
   // Create sendEmail params
   var params = {
@@ -35,6 +34,4 @@ exports.notify = async function({ to, subject, body }) {
   var send = await new aws.SES({ apiVersion: "2019-02-08" })
     .sendEmail(params)
     .promise()
-
-  console.log(`sucessfully sent email ${send.MessageId}`)
 }
