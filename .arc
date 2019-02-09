@@ -8,7 +8,6 @@ post /reset
 
 @events
 web-scrape
-simple
 
 @scheduled
 periodic-scrape rate(4 hours)
