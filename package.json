@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=testing AWS_PROFILE=xxx AWS_REGION=xxx tape tests/*-test.js | tap-spec"
+    "test": "NODE_ENV=testing AWS_PROFILE=xxx AWS_REGION=xxx tape tests/*-test.js | tap-spec",
+    "fixchrome": "cd src/events/web-scrape && rm -rf node_modules && npm i"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,6 @@
   },
   "devDependencies": {
     "@types/node": "10.12.21",
-    "@types/puppeteer": "1.12.1",
     "@types/sinon": "7.0.5",
     "@types/tape": "4.2.33",
     "sinon": "7.2.3",

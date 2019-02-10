@@ -9,12 +9,15 @@ const events = require("./events")
 async function handler(record, callback) {
   try {
     console.log(`web-scrape started`)
-    const recipientEmails = process.env.RECIPIENT_EMAILS
-    if (!recipientEmails) throw new Error("invariant: no recipients")
+
+    // keeping emails in .arc-env is currently screwed up
+    // https://github.com/arc-repos/architect/issues/298
+    const recipientEmails = process.env.RECIPIENT_EMAILS || "peter@peterschilling.org"
     const recipients = recipientEmails.split(',')
 
     const start = new Date()
 
+    console.log(`envs ${JSON.stringify(process.env, null, 2)}`)
     const data = await scraper.scrape()
 
     const previousDataSerialized = await persistence.read()

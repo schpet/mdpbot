@@ -14,8 +14,8 @@ async function scrape(venueFocus) {
   const username = process.env.USERNAME
   const password = process.env.PASSWORD
 
-  if (!username || !password)
-    throw new Error("invariant: expected username / pass")
+  if (!password) throw new Error("invariant: expected password")
+  if (!username) throw new Error("invariant: expected username")
 
   const browser = await puppeteer.launch({
     args: chromium.args,
