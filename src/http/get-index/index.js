@@ -47,6 +47,10 @@ exports.handler = async function http(req) {
   <form action=${url("/reset")} method=post>
     <button type=submit>Reset 🧼</button>
   </form>
+
+  <form action=${url("/whoops")} method=post>
+    <button type=submit>⚠️ Trigger Error</button>
+  </form>
 </div>
 <br />
 

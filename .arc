@@ -5,6 +5,7 @@ mdpbot
 get /
 post /scrape
 post /reset
+post /whoops
 
 @events
 web-scrape
