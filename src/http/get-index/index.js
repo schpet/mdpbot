@@ -1,4 +1,4 @@
-const arc = require('@architect/functions')
+const arc = require("@architect/functions")
 const url = arc.http.helpers.url
 /** @type {import('../../shared/persistence')} */
 const persistence = require("@architect/shared/persistence")
@@ -12,7 +12,14 @@ exports.handler = async function http(req) {
     try {
       const file = await persistence.read()
       if (file.body && file.lastModified) {
-        return `updated ${file.lastModified.toLocaleString()}\n\n${JSON.stringify(JSON.parse(file.body), null, 2)}`
+        const lastModifiedFmt = file.lastModified.toLocaleString("en-US", {
+          timeZone: "America/Los_Angeles"
+        })
+        return `updated ${lastModifiedFmt}\n\n${JSON.stringify(
+          JSON.parse(file.body),
+          null,
+          2
+        )}`
       } else {
         return `missing data... ${JSON.stringify(file)}`
       }
@@ -33,11 +40,11 @@ exports.handler = async function http(req) {
 <h1>Scrapy</h1>
 
 <div style="display: flex">
-  <form action=${url('/scrape')} method=post>
+  <form action=${url("/scrape")} method=post>
     <button type=submit>Scrape 'n 💌</button>
   </form>
 
-  <form action=${url('/reset')} method=post>
+  <form action=${url("/reset")} method=post>
     <button type=submit>Reset 🧼</button>
   </form>
 </div>
