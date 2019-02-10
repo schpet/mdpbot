@@ -16,7 +16,7 @@ notifications.notify({ to: ["peter@peterschilling.org"], subject: "A test email 
 exports.notify = async function({ to, subject, body }) {
   aws.config.update({ region: process.env.AWS_REGION })
 
-  const envName = process.env.NODE_ENV
+  const nameSuffix = process.env.NODE_ENV === "testing" ? " Testing" : ""
 
   const params = {
     Destination: {
@@ -28,10 +28,8 @@ exports.notify = async function({ to, subject, body }) {
       },
       Subject: { Charset: "UTF-8", Data: subject }
     },
-    Source: `Discovery Pass Bot ${envName} <discoverbot@peterschilling.org>`
+    Source: `Discovery Pass Bot${nameSuffix} <discoverbot@peterschilling.org>`
   }
 
-  await new aws.SES({ apiVersion: "2019-02-08" })
-    .sendEmail(params)
-    .promise()
+  await new aws.SES({ apiVersion: "2019-02-08" }).sendEmail(params).promise()
 }

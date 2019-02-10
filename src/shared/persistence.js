@@ -4,21 +4,23 @@ const bucket = "schpet-mydiscoverpass-or"
 const key = `MYdiscoverpass-${process.env.NODE_ENV}.json`
 
 /**
- * @returns {Promise<{data: string, lastModified: Date|undefined}|null>}
+ * @returns {Promise<{body: string | undefined, lastModified: Date | undefined}>}
  */
 async function read() {
   const s3 = new aws.S3({ region: process.env.AWS_REGION })
 
   try {
     const file = await s3.getObject({ Bucket: bucket, Key: key }).promise()
-    if (!file.Body) return null
     return {
-      data: file.Body && file.Body.toString(),
+      body: file.Body && file.Body.toString(),
       lastModified: file.LastModified
     }
   } catch (e) {
     if (e.code === "NoSuchKey") {
-      return null
+      return {
+        body: undefined,
+        lastModified: undefined
+      }
     }
     throw e
   }

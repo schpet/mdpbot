@@ -24,7 +24,7 @@ test(`read reads a file from s3`, async t => {
 
   const result = await persistence.read()
 
-  t.equals(result && result.data, "foobar", "reads file contents")
+  t.equals(result && result.body, "foobar", "reads file contents")
 
   aws.S3.restore()
 })

@@ -11,10 +11,10 @@ exports.handler = async function http(req) {
   const message = await (async () => {
     try {
       const file = await persistence.read()
-      if (file) {
-        return `${JSON.stringify(JSON.parse(file.data), null, 2)}`
+      if (file.body) {
+        return `${JSON.stringify(JSON.parse(file.body), null, 2)}`
       } else {
-        return `${file}`
+        return `no body... ${JSON.stringify(file)}`
       }
     } catch (err) {
       return `uh oh: ${JSON.stringify(err)}`

@@ -12,22 +12,26 @@ async function handler(record, callback) {
 
     // keeping emails in .arc-env is currently screwed up
     // https://github.com/arc-repos/architect/issues/298
-    const recipientEmails = process.env.RECIPIENT_EMAILS || "peter@peterschilling.org"
-    const recipients = recipientEmails.split(',')
+    const recipientEmails =
+      process.env.RECIPIENT_EMAILS || "peter@peterschilling.org"
+    const recipients = recipientEmails.split(",")
 
     const start = new Date()
 
-    console.log(`envs ${JSON.stringify(process.env, null, 2)}`)
     const data = await scraper.scrape()
 
-    const previousDataSerialized = await persistence.read()
+    const { body: previousDataSerialized } = await persistence.read()
     const previousData = previousDataSerialized
-      ? events.deserialize(previousDataSerialized.data)
+      ? events.deserialize(previousDataSerialized)
       : []
 
     const newEvents = events.getNewEvents(previousData, data)
 
-    await persistence.write(JSON.stringify(data))
+    // only write to s3 if files differ
+    const dataSerialized = JSON.stringify(data)
+    if (dataSerialized !== previousDataSerialized) {
+      await persistence.write(dataSerialized)
+    }
 
     if (newEvents.length > 0) {
       const message = events.newEventsMessage(newEvents)
