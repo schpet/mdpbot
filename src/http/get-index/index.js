@@ -11,10 +11,10 @@ exports.handler = async function http(req) {
   const message = await (async () => {
     try {
       const file = await persistence.read()
-      if (file.body) {
-        return `${JSON.stringify(JSON.parse(file.body), null, 2)}`
+      if (file.body && file.lastModified) {
+        return `updated ${file.lastModified.toLocaleString()}\n\n${JSON.stringify(JSON.parse(file.body), null, 2)}`
       } else {
-        return `no body... ${JSON.stringify(file)}`
+        return `missing data... ${JSON.stringify(file)}`
       }
     } catch (err) {
       return `uh oh: ${JSON.stringify(err)}`
