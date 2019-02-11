@@ -64,17 +64,17 @@ test("newEventsMessage builds a nice message", t => {
   t.equal(message.subject, "New events at Hollywood Theater, cooltown")
   t.equal(
     message.body,
-    `🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
+    `🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
 Hollywood Theater
 🌐 http://hollywood.biz
-🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
+🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
 
 other event
 
-🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
+🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
 cooltown
 🌐 http://cool.biz
-🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
+🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
 
 fun times
 yep yep

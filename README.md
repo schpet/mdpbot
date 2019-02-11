@@ -23,3 +23,5 @@ approach:
 todo:
 
 - alerts when failures occur (e.g. scraping changed)
+- make this idempotent (i.e. persist the previous aws request id, i guess?)
+- email me a stack trace or something pointign to a stack trace when things go haywire

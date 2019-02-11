@@ -29,7 +29,7 @@ exports.newEventsMessage = events => {
   const venueSummary = events.map(e => e.venue).join(", ")
   const subject = `New events at ${venueSummary}`
 
-  const hr = "🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫\n"
+  const hr = "🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫\n"
   const hr2 = "🎫➕🎫➕🎫➕🎫\n"
 
   const body = events
