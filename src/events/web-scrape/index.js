@@ -3,19 +3,11 @@ let arc = require("@architect/functions")
 const scraper = require("./scraper")
 /** @type {import('../../shared/persistence')} */
 const persistence = require("@architect/shared/persistence")
-const notifications = require("./notifications")
 const events = require("./events")
 
 async function handler(record, callback) {
   try {
     console.log(`web-scrape started`)
-
-    // keeping emails in .arc-env is currently screwed up
-    // https://github.com/arc-repos/architect/issues/298
-    const recipientEmails =
-      process.env.RECIPIENT_EMAILS || "peter@peterschilling.org"
-    const recipients = recipientEmails.split(",")
-
     const start = new Date()
 
     const data = await scraper.scrape()
@@ -33,19 +25,19 @@ async function handler(record, callback) {
       await persistence.write(dataSerialized)
     }
 
+    const end = new Date()
+    const duration = end.getTime() - start.getTime()
+
     if (newEvents.length > 0) {
-      const message = events.newEventsMessage(newEvents)
-      await notifications.notify({
-        to: recipients,
-        body: message.body,
-        subject: message.subject
+      await arc.events.publish({
+        name: "new-events",
+        payload: {
+          events: newEvents,
+          duration,
+        }
       })
     }
-
-    const end = new Date()
-    const diff = end.getTime() - start.getTime()
-
-    console.log(`web-scrape finished in ${diff}ms`)
+    console.log(`web scrape finished in ${duration} with ${newEvents.length} events`)
 
     callback()
   } catch (e) {

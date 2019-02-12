@@ -1,3 +1,9 @@
+mdpbot
+------
+
+staging
+https://18q7ya2hfk.execute-api.us-west-2.amazonaws.com/staging
+
 approach:
 
 1. login

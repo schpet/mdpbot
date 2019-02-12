@@ -8,3 +8,11 @@ exports.handler = async function http(req) {
     location: url("/")
   }
 }
+
+/**
+ * events:
+ * 
+ * web-scrape 
+ *    -> new-events [{ venue: '...', events: [ ... ] }]
+ * 
+ */

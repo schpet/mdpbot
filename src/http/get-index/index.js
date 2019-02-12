@@ -51,6 +51,10 @@ exports.handler = async function http(req) {
   <form action=${url("/whoops")} method=post>
     <button type=submit>⚠️ Trigger Error</button>
   </form>
+
+  <form action=${url("/fake-event")} method=post>
+    <button type=submit>🕺🏻 Fake Events</button>
+  </form>
 </div>
 <br />
 

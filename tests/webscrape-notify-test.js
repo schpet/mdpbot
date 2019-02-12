@@ -1,7 +1,7 @@
 const test = require("tape")
 const aws = require("aws-sdk")
 const sinon = require("sinon")
-const notifications = require("../src/events/web-scrape/notifications")
+const notifications = require("../src/events/new-events/notifications")
 
 test("notify", async t => {
   t.plan(1)
