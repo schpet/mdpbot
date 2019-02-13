@@ -35,11 +35,17 @@ async function handler(record, callback) {
 
     if (newEvents.length > 0) {
       const message = events.newEventsMessage(newEvents)
-      await notifications.notify({
-        to: recipients,
-        body: message.body,
-        subject: message.subject
-      })
+      await Promise.all([
+        notifications.sendEmail({
+          to: recipients,
+          body: message.body,
+          subject: message.subject
+        }),
+        notifications.snsPublish({
+          subject: message.subject,
+          body: message.body
+        })
+      ])
     }
 
     const end = new Date()

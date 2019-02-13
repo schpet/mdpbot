@@ -13,7 +13,7 @@ notifications.notify({ to: ["peter@peterschilling.org"], subject: "A test email 
  * @param {string} args.body
  * @param {string[]} args.to
  */
-exports.notify = async function({ to, subject, body }) {
+exports.sendEmail = async function({ to, subject, body }) {
   aws.config.update({ region: process.env.AWS_REGION })
 
   const nameSuffix = process.env.NODE_ENV === "testing" ? " Testing" : ""
@@ -32,4 +32,25 @@ exports.notify = async function({ to, subject, body }) {
   }
 
   await new aws.SES({ apiVersion: "2019-02-08" }).sendEmail(params).promise()
+}
+
+/**
+ * @param {object} args
+ * @param {string} args.subject
+ * @param {string} args.body
+ */
+exports.snsPublish = async function({ subject, body }) {
+  aws.config.update({ region: process.env.AWS_REGION })
+
+  // Create publish parameters
+
+  await new aws.SNS()
+    .publish({
+      Message: JSON.stringify({ default: body, sms: subject }),
+      Subject: subject,
+      MessageStructure: "json",
+      TopicArn:
+        "arn:aws:sns:us-west-2:029393613213:mdpbot-staging-notifications" // env var?
+    })
+    .promise()
 }

@@ -3,7 +3,7 @@ const aws = require("aws-sdk")
 const sinon = require("sinon")
 const notifications = require("../src/events/web-scrape/notifications")
 
-test("notify", async t => {
+test("sendEmail", async t => {
   t.plan(1)
 
   sinon.stub(aws, "SES").returns({
@@ -12,7 +12,7 @@ test("notify", async t => {
     })
   })
 
-  await notifications.notify({ to: ["foo@x.com"], subject: "bar", body: "baz" })
+  await notifications.sendEmail({ to: ["foo@x.com"], subject: "bar", body: "baz" })
 
   t.ok(true, "doesn't blow up")
 
