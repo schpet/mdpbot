@@ -37,7 +37,7 @@ exports.handler = async function http(req) {
 <!doctype html>
 <html>
 <body>
-<h1>Scrapy</h1>
+<h1>Scrapy!</h1>
 
 <div style="display: flex">
   <form action=${url("/scrape")} method=post>

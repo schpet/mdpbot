@@ -21,8 +21,8 @@ async function scrape(venueFocus) {
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath,
-    headless: chromium.headless
-    // slowMo: 200
+    headless: chromium.headless,
+    // slowMo: 50
   })
 
   const page = await browser.newPage()
