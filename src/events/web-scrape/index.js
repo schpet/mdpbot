@@ -13,7 +13,7 @@ async function handler(record, callback) {
     // keeping emails in .arc-env is currently screwed up
     // https://github.com/arc-repos/architect/issues/298
     const recipientEmails =
-      process.env.RECIPIENT_EMAILS || "peter@peterschilling.org,himynameisregina@gmail.com,bwr@tinycandyhammers.com"
+      process.env.RECIPIENT_EMAILS || "peter@peterschilling.org,himynameisregina@gmail.com,nessabeene@gmail.com"
     const recipients = recipientEmails.split(",")
 
     const start = new Date()
